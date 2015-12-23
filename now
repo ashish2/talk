@@ -1,0 +1,40 @@
+show selected users online (pubnub or socket.io rooms)
+chat with the selected user
+she showed a tongue (dropdown) > to depict 
+she sent a shock buzz (dropdown) > 
+	to depict she was upset
+	to wake u up
+	just like that, wanted to electrify you
+
+---
+>
+on clicking Send button,
+it will just send the data to the socket.channel 
+& that will dynamically update the chat on the frontend.
+
+>
+on smiley click, just append the (vector smiley copied from bootstrap) smiley text image in textarea.
+
+>
+on socket.on('message')
+
+---
+bugs
+
+>
+//both ppls chat is not visible.
+>
+from usre list, shud be able to chat with anybody, not just index[0]
+>
+//y user shows twice in room userlist, even when user is conneccted only once.
+
+>
+//1st client that connects, gets all user list,
+//but later ones dont get whole user list, they only get clients connected after them
+
+>
+on userList click, try, ng-click = hide/show the div, see ng-show, ng-hide etc, try solving with angular
+
+
+
+

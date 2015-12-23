@@ -1,0 +1,70 @@
+extends index
+script(type="text/javascript", src="/javascripts/chat.js")
+
+block page
+	div.row
+		div.col-md-3(data-ng-controller="UsersCtrl")
+			h4
+				| Friend's List
+			div.row.users(data-ng-repeat="user in users")
+				div.col-md-12
+					img(src="")
+					span
+						| {{user.name}}
+					
+		div.col-md-9(style="height:'10px'; overflow-y: 'scroll';")
+			div.row.chat
+				div.col-md-9
+					h4
+						| Chat: Fr1
+						div.row
+							div.col-md-3.pull-left.msg
+								span hi there
+						div.row
+							div.col-md-3.pull-right.msg
+								span hey!
+			
+			
+			div.row
+				div.col-md-9.panel.panel-default
+					div.row.panel-body
+						div.col-md-12
+							textarea#msg(rows=4, cols=70)
+					div.row.panel-footer
+						div.col-md-2
+							i.fa.fa-gears
+							small &nbsp; She threw some plastic nut-bolts at you
+						div.col-md-2
+							i.fa.fa-flash
+							small &nbsp; She sent you a Shock (Depicting she may have gotten bit angry)
+						div.col-md-2
+							i.fa.fa-heart-o 
+							small &nbsp; Send a Heart
+						div.col-md-2
+							i.fa.fa-smile-o 
+							small &nbsp; Send a Secret smiley
+						div.col-md-2
+							i.glyphicon.glyphicon-camera
+							small &nbsp; Photo
+						div.col-md-2.pull-right
+							a.btn.btn-info.btn-sm
+								i.fa.fa-comment &nbsp; Send
+					
+				
+	
+	//- div.row
+		div.col-md-3
+		div.col-md-6.panel.panel-default
+			div.row.panel-body
+				div.col-md-12
+					textarea(rows=3, cols=60)
+			div.row.panel-footer
+				div.col-md-3
+					i.fa.fa-smile-o 
+					small &nbsp; Secret smiley
+				div.col-md-3
+					i.glyphicon.glyphicon-camera
+					small &nbsp; Photo
+				div.col-md-3.pull-right
+					a.btn.btn-info.btn-sm
+						i.fa.fa-comment &nbsp; Send

@@ -1,0 +1,88 @@
+extends index
+script(type="text/javascript", src="/javascripts/chat.js")
+
+block page
+	div.row#logindiv
+		div.col-md-offset-4.col-md-3
+			form
+				.form-group
+					label(for="name") Name: 
+					input#name.form-control
+				.form-group
+					label(for="email") Email: 
+					input#email.form-control
+				.form-group
+					a#login.btn.btn-md.btn-info Submit
+			
+	div.row#mainchat(style="display: none;")
+		div.col-md-3#usersctrl(data-ng-controller="UsersCtrl")
+			h4
+				| Friend's List
+			div.list-group
+				a.userList.list-group-item(href="#", role="presentation", data-ng-repeat="user in users", data-user="{{user.name}}", data-socket="{{user.socket}}", data-ng-click="")
+					| {{user.name}}
+				
+			//-div.row.users(data-ng-repeat="user in users")
+				div.col-md-12(data-sock="{{user.socket}}")
+					img(src="")
+					span
+						| {{user.name}}
+						
+						
+		div.col-md-9(style="height:'10px'; overflow-y: 'scroll';")
+			div.row
+				div.col-md-12
+			div.row#allChatWindows
+				div.col-md-9.chatWindow(href="#", role="presentation", data-ng-repeat="user in users", data-user="{{user.name}}", data-socket="{{user.socket}}")
+					{{user.name}}
+					div.row
+						div.col-md-3.pull-left.msg
+							span hi there
+					div.row
+						div.col-md-3.pull-right.msg
+							span hey!
+			
+			
+			div.row
+				div.col-md-9.panel.panel-default
+					div.row.panel-body
+						div.col-md-12
+							textarea#msg(rows=4, cols=70)
+					div.row.panel-footer
+						div.col-md-2
+							i.fa.fa-gears
+							small &nbsp; She threw some plastic nut-bolts at you
+						div.col-md-2
+							i.fa.fa-flash
+							small &nbsp; She sent you a Shock (Depicting she may have gotten bit angry)
+						div.col-md-2
+							i.fa.fa-heart-o 
+							small &nbsp; Send a Heart
+						div.col-md-2
+							i.fa.fa-smile-o 
+							small &nbsp; Send a Secret smiley
+						div.col-md-2
+							i.glyphicon.glyphicon-camera
+							small &nbsp; Photo
+						div.col-md-2.pull-right
+							a.btn.btn-info.btn-sm#submit
+								i.fa.fa-comment &nbsp; Send
+					
+				
+	
+	//- div.row
+		div.col-md-3
+		div.col-md-6.panel.panel-default
+			div.row.panel-body
+				div.col-md-12
+					textarea(rows=3, cols=60)
+			div.row.panel-footer
+				div.col-md-3
+					i.fa.fa-smile-o 
+					small &nbsp; Secret smiley
+				div.col-md-3
+					i.glyphicon.glyphicon-camera
+					small &nbsp; Photo
+				div.col-md-3.pull-right
+					a.btn.btn-info.btn-sm
+						i.fa.fa-comment &nbsp; Send
