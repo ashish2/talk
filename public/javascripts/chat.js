@@ -32,7 +32,7 @@ function appendNewMessage(msg) {
 	//$("#msgWindow").append(html);
 	div_id = "#all";
 	
-	$(".chatWindow.active" + div_id).append(html);
+	//$(".chatWindow.active" + div_id).append(html);
 }
 
 
@@ -87,7 +87,8 @@ function setCurrentUsers(usersStr) {
 }
 
 //function appendNewUser(uName, notify) {
-function appendNewUser(clientsData, notify) {
+function appendNewUser(clientsData, notify)
+{
 	//console.log("UsersCtrl", UsersCtrl);
 	//console.log("in appendNewUser func");
 	//console.log("uName, notify", uName, notify);
@@ -96,7 +97,8 @@ function appendNewUser(clientsData, notify) {
 	
 	//$('select#users').append( $('<option></option>').val(uName).html(uName) );
 	
-	//if ( notify && ( myUserName !== uName ) && ( myUserName !== 'All' )  ) {
+	//if ( notify && ( myUserName !== uName ) && ( myUserName !== 'All' )  ) 
+	//{
 		//$('span#msgWindow').append("<span class='adminMsg'> ==>" + uName + " just joined <==<br />" );
 		
 		
@@ -105,15 +107,15 @@ function appendNewUser(clientsData, notify) {
 		
 		// & Add into angular
 		s = angular.element(document.getElementById('usersctrl')).scope();
-		s.$apply( function() {
-			//s.users.push(user);
-			s.users = [];
-			
-			s.users = clientsData;
+		$.each(clientsData, function(i, v) {
+			if( all_sockets.indexOf( v.socket) == -1 )
+			{
+				all_sockets.push(v.socket);
+				s.$apply( function() {
+					s.users.push(v);
+				});
+			}
 		});
-		
-		console.log("in appendNewUser func", clientsData );
-		
 		
 	//}
 	
@@ -124,19 +126,7 @@ $( function() {
 	
 	enableMsgInput(false);
 	
-	//
-	$("#login").on("click", function(e) {
-		e.preventDefault();
-		userdata.name = $("#name").val();
-		userdata.email = $("#email").val();
-		$("#logindiv").hide(700, function() {
-			$("#mainchat").show(700, function(){
-				setUsername();
-			});
-		});
-	});
-	//-
-	
+	// Sockets
 	//socket.on('userJoined', function(user) {
 	socket.on('userJoined', function(clientsData) {
 		//appendNewUser(msg.userName, true);
@@ -165,6 +155,9 @@ $( function() {
 			setFeedback("<span style='color: red'> Username already in use. Try another name. </span>");
 		}
 	});
+	//-
+	
+	// jQuery - Dom
 	
 	//$("input#userName").change(setUsername);
 	//$("input#userName").keypress( function(e) {
@@ -177,13 +170,12 @@ $( function() {
 	//});
 	
 	
-	$(".userList").on("click", function(e) {
-		console.log(e);
-		e.preventDefault();
-		div_id = $(e.target).data("socket");
-		div_id_elem = "#" + $(e.target).data("socket");
-		allChatWindows = $("#allChatWindows");
-		
+	//$(".userList").on("click", function(e) {
+		//console.log(e);
+		//e.preventDefault();
+		//div_id = $(e.target).data("socket");
+		//div_id_elem = "#" + $(e.target).data("socket");
+		//allChatWindows = $("#allChatWindows");
 		//if ( allChatWindows.find(div_id_elem).length == 0 ) 
 		//{
 			//allChatWindows.children(".chatWindow").removeClass("active").hide();
@@ -191,8 +183,26 @@ $( function() {
 			//allChatWindows.append(html);
 			//allChatWindows.find(".active").show();
 		//}
-		
-		
+	//});
+	
+	
+	// Login
+	$("#login").on("click", function(e) {
+		e.preventDefault();
+		userdata.name = $("#name").val();
+		userdata.email = $("#email").val();
+		$("#logindiv").hide(700, function() {
+			$("#mainchat").show(700, function(){
+				setUsername();
+			});
+		});
+	});
+	//-
+	
+	mainUserList = $("#mainUserList");
+	mainUserList.on("click", ".userList", function(e) {
+		$(".userList").removeClass("active");
+		$(e.target).addClass("active");
 	});
 	
 	$("#submit").click(function(e){
@@ -201,6 +211,7 @@ $( function() {
 		e.preventDefault();
 	});
 	
+	//-
 	
 });
 

@@ -20,6 +20,10 @@
 app.controller("UsersCtrl", function($scope, $http){
 	$scope.selectedPerson = 0;
 	$scope.selectedGenre = null;
+	
+	$scope.t = true;
+	$scope.f = false;
+	
 	$scope.users = [];
 	
 	// Filter by, on selecting `No` will remove the key of Languages from params, else, it will set key Languages with the id
@@ -33,6 +37,11 @@ app.controller("UsersCtrl", function($scope, $http){
 		// Sorting
 		//order_by: "length",
 	//};
+	
+	$scope.show = function(user) {
+		console.log("show user", user);
+		//return !f;
+	};
 	
 	$scope.prepareFilter = function(e) {
 		params = $scope.params;
