@@ -23,15 +23,12 @@ function appendNewMessage(msg) {
 	float = "pull-right";
 	// It is a private message to me
 	html = "<div class='row pad-tb3 mg-rt10 vis-hid op0'><div class='col-md-3 msg from-me"+ " "+float+"'><span><b>" + msg.source + '</b>: ' + msg.message + "</b></span></div></div>";
-	
 	active_friend_to_chat_div = "#" + active_friend_to_chat;
 	div_id = active_friend_to_chat_div;
 	chatWindow = $(".chatWindow" + div_id);
 	chatWindow.append(html);
-	//console.log("chatWindow", chatWindow);
 	chatWindow.animate({ scrollTop: chatWindow[0].scrollHeight }, "slow");
 	chatWindow.find(".vis-hid.op0").removeClass("vis-hid").animate({opacity: 100}, "slow");
-	//chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
 function friendAppendNewMessage(msg) {
@@ -40,20 +37,14 @@ function friendAppendNewMessage(msg) {
 	float = "pull-left";
 	if ( msg.source == myUserName )
 		float = "pull-right";
-	
 	// It is a private message to me
 	html = "<div class='row pad-tb3 mg-lt10 vis-hid op0'><div class='col-md-3 msg from-them" + " "+float+"'><span><b>" + msg.source + '</b>: ' + msg.message + "</span></div></div>";
-	
 	active_friend_to_chat_div = "#" + msg.target;
 	div_id = active_friend_to_chat_div;
-	
 	chatWindow = $(".chatWindow" + div_id);
 	chatWindow.append(html);
 	chatWindow.animate({ scrollTop: chatWindow[0].scrollHeight }, "slow");
 	chatWindow.find(".vis-hid.op0").removeClass("vis-hid").animate({opacity: 100}, "slow");
-	
-	//console.log("frnd chatWindow", chatWindow);
-	//chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
 function handleUserLeft( msg ) {
@@ -97,7 +88,7 @@ function sendMessage() {
 		//"target": "All"
 	//});
 	
-	console.log( "current_room", current_room, "socket", socket, "active_friend_to_chat", active_friend_to_chat );
+	//console.log( "current_room", current_room, "socket", socket, "active_friend_to_chat", active_friend_to_chat );
 	
 	// broadcast is undefined
 	socket.emit(chat_type, current_room, msg
@@ -170,7 +161,7 @@ $( function() {
 	
 	socket.on("room_chat", function(msg) {
 		// append msg here only, for me & for the target send the target friends socket_id where it will get appended for friend
-		console.log( "this is what came from server room_chat", msg)
+		//console.log( "this is what came from server room_chat", msg)
 		friendAppendNewMessage(msg);
 	});
 	
