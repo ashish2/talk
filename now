@@ -38,6 +38,7 @@ bugs
 //on userList click, try, ng-click = hide/show the div, see ng-show, ng-hide etc, try solving with angular
 
 >
+//-
 the message is broadcasting to everyone, since its a common room, and wichever div is visible over there the 
 message gets added, instead of the actual div with socket id,
 all common mesages shud be appended in #all div id,
@@ -46,11 +47,17 @@ so now, make 1 socket for personal rooms, whichever socket has a lower, that com
 like lowerSockID_higherSockID & append to that socket_id div
 
 >
-guess both sockets are not connected to the room,
+//guess both sockets are not connected to the room,
 
 >
-dont broadcast to all sockets, only send to friends socket
+//dont broadcast to all sockets, only send to friends socket
 
 >
-msg append not happening for other user
+//msg append not happening for other user
+
+>
+//x scroll shudnt come
+
+>
+bubble comes animation
 

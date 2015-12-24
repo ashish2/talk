@@ -35,7 +35,7 @@ block page
 					div.row#allChatWindows
 						div.col-md-9.chatWindow(data-ng-show="show_div==0", data-ng-animate="'animate'")
 							h4 Select a user to talk to
-						div.col-md-9.chatWindow(data-ng-repeat="user in users", data-user="{{user.name}}", data-socket="{{user.socket}}", id="{{user.socket}}", data-ng-show="show_div=='{{user.socket}}'")
+						div.col-md-9.chatWindow.pad3(data-ng-repeat="user in users", data-user="{{user.name}}", data-socket="{{user.socket}}", id="{{user.socket}}", data-ng-show="show_div=='{{user.socket}}'")
 							h4 Your Chat with:
 								| {{user.name}}
 							
@@ -43,6 +43,7 @@ block page
 								div.col-md-3.pull-left.msg
 									span hi there
 					
+					div.row.pad3
 					
 					div.row
 						div.col-md-9.panel.panel-default
