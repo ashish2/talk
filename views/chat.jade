@@ -21,7 +21,7 @@ block page
 					h4
 						| Friend's List
 					div.list-group#mainUserList
-						button.userList.list-group-item(role="presentation", data-ng-repeat="user in users", data-user="{{user.name}}", data-socket="{{user.socket}}", data-ng-click="show(user)")
+						button.userList.list-group-item(role="presentation", data-ng-repeat="user in users", data-user="{{user.name}}", data-socket="{{user.socket}}", data-ng-click="show(user)" data-ng-animate="'animate'")
 							| {{user.name}}
 				
 						//-div.row.users(data-ng-repeat="user in users")
@@ -33,7 +33,7 @@ block page
 						
 				div.col-md-9
 					div.row#allChatWindows
-						div.col-md-9.chatWindow(data-ng-show="show_div==0")
+						div.col-md-9.chatWindow(data-ng-show="show_div==0", data-ng-animate="'animate'")
 							h4 Select a user to talk to
 						div.col-md-9.chatWindow(data-ng-repeat="user in users", data-user="{{user.name}}", data-socket="{{user.socket}}", id="{{user.socket}}", data-ng-show="show_div=='{{user.socket}}'")
 							h4 Your Chat with:

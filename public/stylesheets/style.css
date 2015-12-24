@@ -27,3 +27,25 @@ a {
 	padding-left: 15px;
 }
 
+.animate{
+
+}
+
+.animate-enter.animate-enter-active, .animate-leave {
+	left: 0;
+}
+.animate-leave.animate-leave-active, .animate-enter {
+	left: 100px;
+}
+.animate-enter, .animate-leave {
+	transition: 500ms ease-in all;
+	position: relative;
+	display: block;
+} 
+
+.animate-add{
+	transition: background 5s ease-in all;
+}
+.animate-remove{
+	transition: background 5s ease-in all;
+}
