@@ -6,19 +6,13 @@ var socketsOfClients = {};
 
 io.sockets.on('connection', function(socket) {
 	
-	//console.log("===socket===", socket);
-	//console.log("===socket rooms===", socket.rooms);
-	
 	socket.on('set_username', function(userName) {
-		//console.log( "sock on set_username called");
-		
 		// Is this an existing username
 		if(clients[userName] === undefined){
 			// Does not exists, so proceed
 			clients[userName] = socket.id;
 			clientsData.push({name: userName, socket: socket.id });
 			socketsOfClients[socket.id] = userName;
-			
 			//userNameAvailable(socket.id, userName);
 			userJoined(userName, socket.id);
 		}
@@ -31,8 +25,6 @@ io.sockets.on('connection', function(socket) {
 	});
 	
 	socket.on('message', function(msg) {
-		
-		//console.log ("emitted message", msg);
 		
 		var srcUser;
 		if(msg.inferSrcUser) {
@@ -52,9 +44,6 @@ io.sockets.on('connection', function(socket) {
 		} else {
 			// Look up the socket id
 			//io.sockets.sockets[clients[msg.target]].emit('message', 
-			
-			//console.log("io.sockets.connected------", io.sockets.connected);
-			
 			//io.sockets.sockets[clients[msg.target]].emit('message', 
 			io.sockets.connected[clients[msg.target]].emit("message",
 			{
@@ -92,17 +81,8 @@ io.sockets.on('connection', function(socket) {
 		else
 		{
 			// Ignoring for now
-			//console.log("ELSE");
-			//console.log( "socket.rooms.indexOf(room) == -1, io.sockets.connected[partner_sock] != undefined");
-			//console.log( socket.rooms.indexOf(room) == -1, io.sockets.connected[partner_sock] != undefined);
 		}
 		
-		//console.log("===socket", socket);
-		//console.log("===socket.id", socket.id);
-		//console.log("socket.rooms", socket.rooms);
-		//console.log("===io.sockets.connected[partner_sock]", io.sockets.connected[partner_sock]);
-		//console.log("===io.sockets.connected[partner_sock].id", io.sockets.connected[partner_sock].id);
-		//console.log("io.sockets.connected[partner_sock].rooms", io.sockets.connected[partner_sock].rooms);
 	});
 	
 	
@@ -122,8 +102,6 @@ io.sockets.on('connection', function(socket) {
 	socket.on("room_chat", function( room_name, msg ) {
 		//socket.broadcast.to(room_name).emit('function', 'data1', 'data2', msg);
 		//socket.broadcast.to(socket.current_room).emit('room_chat', 'data1', 'data2', msg);
-		//console.log("rom_chat io.sockets.in(room_name)", io.sockets.in(room_name));
-		//console.log("room_name", room_name, "msg", msg);
 		socket.broadcast.to(room_name).emit("room_chat", msg);
 		//io.sockets.in(room_name).emit("room_chat", msg);
 	});
@@ -155,34 +133,7 @@ io.sockets.on('connection', function(socket) {
 
 
 function userJoined(uName, sock_id) {
-	//console.log("socketsOfClients");
-	//console.log(socketsOfClients);
-	//console.log(Object.keys(socketsOfClients));
-	
-	//Object.keys(socketsOfClients).forEach( function(sId) {
-		
-		//console.log("uName", uName);
-		//console.log("io-----", io);
-		//console.log("socketsOfClients-----", socketsOfClients);
-		//console.log("io.sockets-----", io.sockets);
-		//console.log("io.sockets.sockets-----", io.sockets.sockets);
-		//console.log("sId-----", sId);
-		//console.log("io.sockets.sockets[sId]-----", io.sockets.sockets[sId]);
-		
-		//io.sockets.connected[sId].emit('userJoined', { "userName": uName} );
-		// FTM (shudnt be io.emit, io.emit emits to all, just select sockets.sId & emit to only those)
-		// FTM
-		sId = clients[uName];
-		//-
-		//io.sockets.emit('userJoined', { "userName": socketsOfClients[sId] } );
-		//var user = {};
-		//user["name"] = uName;
-		//user["socket"] = sock_id;
-		
-		io.sockets.emit('userJoined', clientsData );
-		
-	//});
-	
+	io.sockets.emit('userJoined', clientsData );
 }
 
 function userLeft(uName) {

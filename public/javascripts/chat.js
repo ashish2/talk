@@ -88,8 +88,6 @@ function sendMessage() {
 		//"target": "All"
 	//});
 	
-	//console.log( "current_room", current_room, "socket", socket, "active_friend_to_chat", active_friend_to_chat );
-	
 	// broadcast is undefined
 	socket.emit(chat_type, current_room, msg
 	);
@@ -109,29 +107,18 @@ function setCurrentUsers(usersStr) {
 function appendNewUser(clientsData, notify)
 {
 	
-	//$('select#users').append( $('<option></option>').val(uName).html(uName) );
+	// & Add into angular
+	s = angular.element(document.getElementById('usersctrl')).scope();
+	$.each(clientsData, function(i, v) {
+		if( all_sockets.indexOf( v.socket) == -1 && v.socket != userdata.socket )
+		{
+			all_sockets.push(v.socket);
+			s.$apply( function() {
+				s.users.push(v);
+			});
+		}
+	});
 	
-	//if ( notify && ( myUserName !== uName ) && ( myUserName !== 'All' )  ) 
-	//{
-		//$('span#msgWindow').append("<span class='adminMsg'> ==>" + uName + " just joined <==<br />" );
-		
-		
-		// if its -1, then push in it
-		//all_sockets.push( user.sock_id);
-		
-		// & Add into angular
-		s = angular.element(document.getElementById('usersctrl')).scope();
-		$.each(clientsData, function(i, v) {
-			if( all_sockets.indexOf( v.socket) == -1 && v.socket != userdata.socket )
-			{
-				all_sockets.push(v.socket);
-				s.$apply( function() {
-					s.users.push(v);
-				});
-			}
-		});
-		
-	//}
 	
 }
 
@@ -194,7 +181,6 @@ $( function() {
 		active_friend_to_chat = $(e.target).data("socket");
 		getCurrentRoom();
 		join_room_fn();
-		//console.log("active_friend_to_chat", active_friend_to_chat);
 	});
 	
 	$("#submit").click(function(e){
