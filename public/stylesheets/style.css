@@ -21,11 +21,12 @@ a {
 */
 .chatWindow {
 	height: 250px !important;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
-.pad3 {
-	padding: 3px;
+.pad-tb3 {
+	padding-top: 3px;
+	padding-bottom: 3px;
 }
 
 .mg-rt10 {
