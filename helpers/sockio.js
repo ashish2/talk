@@ -6,11 +6,11 @@ var socketsOfClients = {};
 
 io.sockets.on('connection', function(socket) {
 	
-	console.log("===socket===", socket);
-	console.log("===socket rooms===", socket.rooms);
+	//console.log("===socket===", socket);
+	//console.log("===socket rooms===", socket.rooms);
 	
 	socket.on('set_username', function(userName) {
-		console.log( "sock on set_username called");
+		//console.log( "sock on set_username called");
 		
 		// Is this an existing username
 		if(clients[userName] === undefined){
@@ -32,7 +32,7 @@ io.sockets.on('connection', function(socket) {
 	
 	socket.on('message', function(msg) {
 		
-		console.log ("emitted message", msg);
+		//console.log ("emitted message", msg);
 		
 		var srcUser;
 		if(msg.inferSrcUser) {
@@ -53,7 +53,7 @@ io.sockets.on('connection', function(socket) {
 			// Look up the socket id
 			//io.sockets.sockets[clients[msg.target]].emit('message', 
 			
-			console.log("io.sockets.connected------", io.sockets.connected);
+			//console.log("io.sockets.connected------", io.sockets.connected);
 			
 			//io.sockets.sockets[clients[msg.target]].emit('message', 
 			io.sockets.connected[clients[msg.target]].emit("message",
@@ -76,30 +76,56 @@ io.sockets.on('connection', function(socket) {
 	
 	// Room connection
 	// Join Room
-	socket.on('join_room', function(my_sock, partner_sock){
-		room = my_sock + "_" + partner_sock;
-		if( !socket.rooms[room] )
+	socket.on('join_room', function(room, partner_sock){
+		
+		//console.log( "room, partner_sock", room, partner_sock);
+		
+		//room = my_sock + "_" + partner_sock;
+		//console.log("socket.rooms.indexOf(room) == -1", socket.rooms.indexOf(room) == -1);
+		if( socket.rooms.indexOf(room) == -1 && io.sockets.connected[partner_sock] != undefined )
 		{
-			//socket.room = room;
+			socket.current_room = room;
 			socket.join(room);
 			// select the partners socket, & connect him too
 			io.sockets.connected[partner_sock].join(room);
 		}
+		else
+		{
+			// Ignoring for now
+			//console.log("ELSE");
+			//console.log( "socket.rooms.indexOf(room) == -1, io.sockets.connected[partner_sock] != undefined");
+			//console.log( socket.rooms.indexOf(room) == -1, io.sockets.connected[partner_sock] != undefined);
+		}
+		
+		//console.log("===socket", socket);
+		//console.log("===socket.id", socket.id);
+		//console.log("socket.rooms", socket.rooms);
+		//console.log("===io.sockets.connected[partner_sock]", io.sockets.connected[partner_sock]);
+		//console.log("===io.sockets.connected[partner_sock].id", io.sockets.connected[partner_sock].id);
+		//console.log("io.sockets.connected[partner_sock].rooms", io.sockets.connected[partner_sock].rooms);
 	});
 	
+	
 	// Leave Room
-	socket.on('leave_room', function(my_sock, partner_sock){
-		room = my_sock + "_" + partner_sock;
+	socket.on('leave_room', function(room, partner_sock){
+		//room = my_sock + "_" + partner_sock;
 		// let the socket leave this room, & also let the partner leave that room
 		if(socket.rooms[room])
 			//socket.leave(socket.room);
 			socket.leave(socket.rooms[room]);
+			// Remove the partner also from the room (*Maybe)
+			//io.sockets.connected[partner_sock].join(room);
 	});
 	//-
 	
 	// Send in a particular room
 	socket.on("room_chat", function( room_name, msg ) {
-		socket.broadcast.to(room_name).emit('function', 'data1', 'data2');
+		//socket.broadcast.to(room_name).emit('function', 'data1', 'data2', msg);
+		//socket.broadcast.to(socket.current_room).emit('room_chat', 'data1', 'data2', msg);
+		//console.log("rom_chat io.sockets.in(room_name)", io.sockets.in(room_name));
+		//console.log("room_name", room_name, "msg", msg);
+		socket.broadcast.to(room_name).emit("room_chat", msg);
+		//io.sockets.in(room_name).emit("room_chat", msg);
 	});
 	//- 
 	
@@ -129,9 +155,9 @@ io.sockets.on('connection', function(socket) {
 
 
 function userJoined(uName, sock_id) {
-	console.log("socketsOfClients");
-	console.log(socketsOfClients);
-	console.log(Object.keys(socketsOfClients));
+	//console.log("socketsOfClients");
+	//console.log(socketsOfClients);
+	//console.log(Object.keys(socketsOfClients));
 	
 	//Object.keys(socketsOfClients).forEach( function(sId) {
 		

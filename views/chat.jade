@@ -33,8 +33,10 @@ block page
 						
 				div.col-md-9
 					div.row#allChatWindows
-						div.col-md-9.chatWindow(data-ng-repeat="user in users", data-user="{{user.name}}", data-socket="{{user.socket}}", id="{{user.socket}}", data-ng-show="{{user.show}}")
-							h4 Chat:
+						div.col-md-9.chatWindow(data-ng-show="show_div==0")
+							h4 Select a user to talk to
+						div.col-md-9.chatWindow(data-ng-repeat="user in users", data-user="{{user.name}}", data-socket="{{user.socket}}", id="{{user.socket}}", data-ng-show="show_div=='{{user.socket}}'")
+							h4 Your Chat with:
 								| {{user.name}}
 							
 							//- div.row

@@ -22,9 +22,11 @@ on socket.on('message')
 bugs
 
 >
-//both ppls chat is not visible.
+//both ppls chat is not visible. only 1 is visible
+
 >
-from usre list, shud be able to chat with anybody, not just index[0]
+//from usre list, shud be able to chat with anybody, not just index[0]
+
 >
 //y user shows twice in room userlist, even when user is conneccted only once.
 
@@ -33,8 +35,22 @@ from usre list, shud be able to chat with anybody, not just index[0]
 //but later ones dont get whole user list, they only get clients connected after them
 
 >
-on userList click, try, ng-click = hide/show the div, see ng-show, ng-hide etc, try solving with angular
+//on userList click, try, ng-click = hide/show the div, see ng-show, ng-hide etc, try solving with angular
 
+>
+the message is broadcasting to everyone, since its a common room, and wichever div is visible over there the 
+message gets added, instead of the actual div with socket id,
+all common mesages shud be appended in #all div id,
+and, personal messages shud append in #socket_id div
+so now, make 1 socket for personal rooms, whichever socket has a lower, that comes first in room id format, 
+like lowerSockID_higherSockID & append to that socket_id div
 
+>
+guess both sockets are not connected to the room,
 
+>
+dont broadcast to all sockets, only send to friends socket
+
+>
+msg append not happening for other user
 

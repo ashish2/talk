@@ -24,6 +24,7 @@ app.controller("UsersCtrl", function($scope, $http){
 	$scope.t = true;
 	$scope.f = false;
 	
+	$scope.show_div = 0;
 	$scope.users = [];
 	
 	// Filter by, on selecting `No` will remove the key of Languages from params, else, it will set key Languages with the id
@@ -39,8 +40,7 @@ app.controller("UsersCtrl", function($scope, $http){
 	//};
 	
 	$scope.show = function(user) {
-		console.log("show user", user);
-		//return !f;
+		$scope.show_div = user.socket;
 	};
 	
 	$scope.prepareFilter = function(e) {
