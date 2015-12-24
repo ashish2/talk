@@ -24,7 +24,7 @@ function appendNewMessage(msg) {
 	
 	
 	// It is a private message to me
-	html = "<div class='row'><div class='col-md-3 msg "+float+"'><span><b>" + msg.source + ': ' + msg.message + "</b></span></div></div>";
+	html = "<div class='row'><div class='col-md-3 msg from-me"+ " "+float+"'><span><b>" + msg.source + '</b>: ' + msg.message + "</b></span></div></div>";
 	
 	active_friend_to_chat_div = "#" + active_friend_to_chat;
 	div_id = active_friend_to_chat_div;
@@ -39,7 +39,7 @@ function friendAppendNewMessage(msg) {
 		float = "pull-right";
 	
 	// It is a private message to me
-	html = "<div class='row'><div class='col-md-3 msg "+float+"'><span><b>" + msg.source + ': ' + msg.message + "</b></span></div></div>";
+	html = "<div class='row'><div class='col-md-3 msg from-them" + " "+float+"'><span><b>" + msg.source + '</b>: ' + msg.message + "</span></div></div>";
 	
 	active_friend_to_chat_div = "#" + msg.target;
 	div_id = active_friend_to_chat_div;
