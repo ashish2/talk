@@ -6,8 +6,6 @@ var socketsOfClients = {};
 
 io.sockets.on('connection', function(socket) {
 	
-	console.log("connection", socket);
-	
 	socket.on('set_username', function(userName) {
 	
 		// Is this an existing username
@@ -69,9 +67,6 @@ io.sockets.on('connection', function(socket) {
 	// Room connection
 	// Join Room
 	socket.on('join_room', function(room, partner_sock){
-		
-		console.log("socket join_room", room, partner_sock);
-		
 		//console.log( "room, partner_sock", room, partner_sock);
 		
 		//room = my_sock + "_" + partner_sock;

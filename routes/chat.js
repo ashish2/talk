@@ -4,6 +4,6 @@
  */
 
 exports.index = function(req, res){
-	res.render('chat', { title: 'Express' });
+	res.render('chat', { title: 'the chat app :)' });
 };
 
