@@ -6,7 +6,7 @@ var socketsOfClients = {};
 
 io.sockets.on('connection', function(socket) {
 	
-	console.log("connection", room, partner_sock);
+	console.log("connection", socket);
 	
 	socket.on('set_username', function(userName) {
 	
