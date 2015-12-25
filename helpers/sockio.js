@@ -5,8 +5,8 @@ var clientsData = [];
 var socketsOfClients = {};
 
 io.sockets.on('connection', function(socket) {
-	
 	socket.on('set_username', function(userName) {
+	
 		// Is this an existing username
 		if(clients[userName] === undefined){
 			// Does not exists, so proceed
@@ -66,6 +66,8 @@ io.sockets.on('connection', function(socket) {
 	// Room connection
 	// Join Room
 	socket.on('join_room', function(room, partner_sock){
+		
+		//console.log("socket join_room", room, partner_sock);
 		
 		//console.log( "room, partner_sock", room, partner_sock);
 		

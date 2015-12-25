@@ -62,4 +62,12 @@ like lowerSockID_higherSockID & append to that socket_id div
 //bubble comes animation
 though acheived with js, this shud be acheived ideally with ng
 
+>
+get variable from js to jade to load dynamically the required server config file
+
+>
+define local & live server for heroku,
+same way, mite be required to define,
+dev environment for Live server & Local server,
+same type env for multiple servers
 

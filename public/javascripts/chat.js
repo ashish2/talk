@@ -52,7 +52,18 @@ function handleUserLeft( msg ) {
 }
 
 //socket = io.connect("http://localhost:3000", {transports:['websocket']} );
-socket = io.connect("http://localhost:3000");
+//socket = io.connect("http://localhost:3000");
+
+scheme  = config.server.scheme;
+domain = config.server.domain;
+
+if(config.server.port) 
+	port = ":" + config.server.port;
+else
+	port = "";
+
+url = scheme + domain + port;
+socket = io.connect(url);
 
 function setFeedback(fb) {
 	$("span#feedback").html(fb);
