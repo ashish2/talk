@@ -68,7 +68,6 @@ io.sockets.on('connection', function(socket) {
 	// Join Room
 	socket.on('join_room', function(room, partner_sock){
 		//console.log( "room, partner_sock", room, partner_sock);
-		
 		//room = my_sock + "_" + partner_sock;
 		//console.log("socket.rooms.indexOf(room) == -1", socket.rooms.indexOf(room) == -1);
 		if( socket.rooms.indexOf(room) == -1 && io.sockets.connected[partner_sock] != undefined )
